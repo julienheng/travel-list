@@ -1,10 +1,20 @@
-export default function Item() {
+type Props = {
+  item: {
+    description: string;
+    quantity: number;
+    packed: boolean;
+    id: number;
+  };
+};
+
+export default function Item({ item }: Props) {
   return (
     <li>
-      <span className="">
-        
+      <input type="checkbox" value="" />
+      <span style={item.packed ? { textDecoration: "line-through" } : {}}>
+        {item.quantity} {item.description}
       </span>
-      {/* <button onClick={() => ()}>❌</button> */}
-   </li>
-  )
+      <button>❌</button>
+    </li>
+  );
 }

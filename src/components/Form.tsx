@@ -1,24 +1,34 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState } from "react";
 
-export default function Form() {
+type Props = {
+  handleAddItems: (item: any) => void;
+}
+
+export default function Form({ handleAddItems }: Props) {
+
   const [description, setDescription] = useState("");
   const [quantity, setQuantity] = useState(1);
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     
-    if (!description) return // NOTHING RETURNED
+    if (!description) return;
     
-    const newItem = { description, quantity, packed: false, id: Date.now() }
+    const newItem = { description, quantity, packed: false, id: Date.now() };
+    console.log(newItem)
 
-    setDescription("")
-    setQuantity(1)
+    handleAddItems(newItem);
+
+    setDescription("");
+    setQuantity(1);
   }
 
   return (
     <form
       onSubmit={handleSubmit}
-      className="bg-[#e5771f] py-[2rem] flex justify-center items-center gap-[0.8rem]">
+      className="bg-[#e5771f] py-[2rem] flex justify-center items-center gap-[0.8rem]"
+    >
       <h3 className="text-[1rem]">What do you need for your 😍 trip?</h3>
       <select
         className="p-2 rounded-full"
@@ -42,3 +52,6 @@ export default function Form() {
     </form>
   );
 }
+  
+
+  
