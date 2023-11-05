@@ -35,6 +35,7 @@ function App() {
         items={items}
         handleDeleteItem={handleDeleteItem}
         onToggleItem={onToggleItem}
+        setItems={setItems}
       />
       <Stats items={items} />
     </div>
