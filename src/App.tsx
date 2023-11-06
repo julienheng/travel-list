@@ -1,44 +1,22 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import "./App.css";
-import { useState } from "react";
+import { Routes, Route } from "react-router-dom";
+import { NextUIProvider } from "@nextui-org/react";
 
 // COMPONENTS
-import Logo from "./components/Logo";
-import Form from "./components/Form";
-import PackingList from "./components/PackingList";
-import Stats from "./components/Stats";
+import Home from "./components/Home";
+import TravelList from "./components/TravelList/TravelList";
+import EatAndSplit from "./components/EatAndSplit/EatAndSplit";
 
 function App() {
-  const [items, setItems] = useState<any[]>([]);
-
-  function handleAddItems(item: any) {
-    setItems((prevItems) => [item, ...prevItems]);
-  }
-
-  const handleDeleteItem = (id: number) => {
-    setItems((prevItems) => prevItems.filter((item) => item.id !== id));
-  };
-
-  const onToggleItem = (id: number) => {
-    setItems((prevItems) =>
-      prevItems.map((items) =>
-        items.id === id ? { ...items, packed: !items.packed } : items
-      )
-    );
-  };
-
   return (
-    <div className="w-screen min-h-screen grid grid-rows-[auto,auto,1fr,auto]">
-      <Logo />
-      <Form handleAddItems={handleAddItems} />
-      <PackingList
-        items={items}
-        handleDeleteItem={handleDeleteItem}
-        onToggleItem={onToggleItem}
-        setItems={setItems}
-      />
-      <Stats items={items} />
-    </div>
+    <NextUIProvider>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/travellist" element={<TravelList />} />
+        <Route path="/eatandsplit" element={<EatAndSplit />} />
+      </Routes>
+    </NextUIProvider>
   );
 }
 
